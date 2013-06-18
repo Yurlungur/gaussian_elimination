@@ -47,7 +47,6 @@ private:
   }
     
 public:
-
   // This function gives the length of the array.
   int length() {
     return array_length;

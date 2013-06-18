@@ -1,7 +1,7 @@
 // dynamic_array_test_driver.cpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-06-18 00:07:37 (jonah)>
+// Time-stamp: <2013-06-18 17:27:36 (jonah)>
 
 // This file is a test driver for the dynamic_array.cpp
 
@@ -12,6 +12,7 @@ using namespace std;
 
 // ----------------------------------------------------------------------
 int main() {
+
   int testlength = 10;
   cout << "Beginning test of Dynamic1DArray." << endl;
   // Dynamic1DArray Test
@@ -41,7 +42,7 @@ int main() {
        << "The array is currently: "
        << testing1
        << endl;
-
+  
   // Dynamic2DArray Test
   cout << "\nBeginning test of Dynamic2DArray." << endl;
   int testwidth = 5;
@@ -70,12 +71,11 @@ int main() {
   cout << "The current array is: "
        << testing2
        << endl;
-
   cout << "Testing the reset method." << endl;
   testing2.reset(2,2);
   Dynamic2DArray<int> testing3(5,5);
   testing3.reset(2,2);
-  
+
   return 0;
 }
 // ----------------------------------------------------------------------
