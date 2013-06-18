@@ -1,7 +1,7 @@
 // dynamic_array.hpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-06-17 02:10:13 (jonah)>
+// Time-stamp: <2013-06-18 00:07:20 (jonah)>
 
 // This file defines a library for using dynamic arrays of one and two
 // dimensions. Useful for Gaussian Elimination.
@@ -19,12 +19,18 @@ using namespace std;
 // A class for 1-dimensional dynamic arrays.
 template<typename TYPE>
 class Dynamic1DArray {
-public: // constructors.
+public: // constructors. And Destructors.
   // Generates an empty dynamic 1D array of length l.
   Dynamic1DArray(int l) {
     my_array = new TYPE[l];
     array_length = l;
   }
+  /*
+  // Destructor. Returns all dynamic memory used by the object to the heap.
+  ~Dynamic1DArray() {
+    delete [] my_array;
+  }
+  */
 private:
   // The pointer to the dynamic array.
   TYPE * my_array;
@@ -42,6 +48,7 @@ private:
   }
     
 public:
+
   // This function gives the length of the array.
   int length() {
     return array_length;
@@ -72,11 +79,18 @@ public:
     }
     s << get(array_length-1) << "]";
   }
+
+  // Overload the stream input operator. 
+  friend ostream& operator <<(ostream &out, Dynamic1DArray<TYPE> a) {
+    a.print(out);
+    return out;
+  }
+
 };
 
 template<typename TYPE>
 class Dynamic2DArray {
-public: // constructors.
+public: // constructors and destructors.
   // Generates an empty dynamic 2D array of width i and height j.
   Dynamic2DArray(int i, int j) {
     array_height = i;
@@ -85,6 +99,13 @@ public: // constructors.
     for (int row=0; row < array_height; row++) {
       my_array[row] = new TYPE[array_width];
     }
+  }
+  // Returns all dynamic memory to the heap.
+  ~Dynamic2DArray() {
+    for (int y = 0; y < array_width; y++) {
+      delete [] my_array[y];
+    }
+    delete [] my_array;
   }
 
 private:
@@ -128,10 +149,16 @@ public:
   }
   // Clears out the array and resets its dimensions to (i,j).
   void reset(int i, int j) {
-    for (int y = 0; y < array_width; y++) {
-      delete [] my_array[y];
+    for (int row = 0; row < array_height; row++) {
+      delete [] my_array[row];
     }
     delete [] my_array;
+    array_height = i;
+    array_width = j;
+    my_array = new TYPE* [array_height];
+    for (int row=0; row < array_height; row++) {
+      my_array[row] = new TYPE[array_width];
+    }
   }
   // Prints the array as a 2D matrix.
   // Quick and dirty. No formatting.
@@ -144,6 +171,11 @@ public:
       s << get(row,array_width-1) << "]";
     }
     s << "\n";
+  }
+  // Overload the stream input operator. 
+  friend ostream& operator <<(ostream &out, Dynamic2DArray<TYPE> a) {
+    a.print(out);
+    return out;
   }
 };
 

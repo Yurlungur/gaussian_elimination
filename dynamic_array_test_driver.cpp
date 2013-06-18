@@ -1,7 +1,7 @@
 // dynamic_array_test_driver.cpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-06-17 02:05:05 (jonah)>
+// Time-stamp: <2013-06-18 00:07:37 (jonah)>
 
 // This file is a test driver for the dynamic_array.cpp
 
@@ -38,9 +38,9 @@ int main() {
   testing1.set(19,4);
   cout << "The 19th element is: " << testing1.get(19) << endl;
   cout << "Checking the print function.\n"
-       << "The array is currently: ";
-  testing1.print(cout);
-  cout << endl;
+       << "The array is currently: "
+       << testing1
+       << endl;
 
   // Dynamic2DArray Test
   cout << "\nBeginning test of Dynamic2DArray." << endl;
@@ -67,15 +67,15 @@ int main() {
   cout << endl;
 
   cout << "Testing the print method." << endl;
-  cout << "The current array is: ";
-  testing2.print(cout);
-  cout << endl;
+  cout << "The current array is: "
+       << testing2
+       << endl;
 
   cout << "Testing the reset method." << endl;
   testing2.reset(2,2);
   Dynamic2DArray<int> testing3(5,5);
   testing3.reset(2,2);
-
+  
   return 0;
 }
 // ----------------------------------------------------------------------
