@@ -1,7 +1,7 @@
 // dynamic_array.hpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-06-18 00:07:20 (jonah)>
+// Time-stamp: <2013-06-18 16:51:58 (jonah)>
 
 // This file defines a library for using dynamic arrays of one and two
 // dimensions. Useful for Gaussian Elimination.
@@ -25,12 +25,10 @@ public: // constructors. And Destructors.
     my_array = new TYPE[l];
     array_length = l;
   }
-  /*
   // Destructor. Returns all dynamic memory used by the object to the heap.
   ~Dynamic1DArray() {
     delete [] my_array;
   }
-  */
 private:
   // The pointer to the dynamic array.
   TYPE * my_array;
