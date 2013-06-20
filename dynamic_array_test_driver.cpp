@@ -1,7 +1,7 @@
 // dynamic_array_test_driver.cpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-06-18 17:27:36 (jonah)>
+// Time-stamp: <2013-06-20 17:05:31 (jonah)>
 
 // This file is a test driver for the dynamic_array.cpp
 
@@ -28,6 +28,18 @@ int main() {
   for (int i = 0; i < testlength; i++) {
     cout << "#   " << i << "     " << testing1.get(i) << endl;
   }
+
+  cout << "Testing the access method."
+       << "Setting the 0th element to 100." << endl;
+  testing1[0] = 100;
+  cout << "The 0th element is now: " << testing1[0] << endl;
+
+  cout << "\nTesting the assignment operator." << endl;
+  Dynamic1DArray<int> testing4(testlength);
+  testing4 = testing1;
+  cout << "The new array is: " << testing4 << endl;
+  cout << "The old array is: " << testing1 << endl;
+
   cout << "Test the reset method." << endl;
   testing1.reset(20);
   cout << "Ensure the first element is junk.\n"
@@ -42,6 +54,8 @@ int main() {
        << "The array is currently: "
        << testing1
        << endl;
+
+  cout << "And the assigned array is: " << testing4 << endl;
   
   // Dynamic2DArray Test
   cout << "\nBeginning test of Dynamic2DArray." << endl;
@@ -67,15 +81,29 @@ int main() {
   }
   cout << endl;
 
+  cout << "Testing the access function." << endl;
+  cout << "Setting the (0,0) element to 100." << endl;
+  testing2.access(0,0) = 100;
+  cout << "The (0,0) element is now: " << testing2.access(0,0) << endl;
+
   cout << "Testing the print method." << endl;
   cout << "The current array is: "
        << testing2
        << endl;
-  cout << "Testing the reset method." << endl;
-  testing2.reset(2,2);
-  Dynamic2DArray<int> testing3(5,5);
-  testing3.reset(2,2);
 
+  
+  cout << "\nTesting the copy and reset method." << endl;
+  cout << "Making a new dynamic array." << endl;
+  Dynamic2DArray<int> testing5;
+  cout << "Copying the old array into the new one." << endl;
+  testing5 = testing2;
+  cout << "Reseting the old array." << endl;
+  testing2.reset(2,2);
+  cout << "The old array is now: " << testing2 << endl;
+  cout << "The new array is now: " << testing5 << endl;
+
+
+  cout << "\n\nThe test is now complete!" << endl;
   return 0;
 }
 // ----------------------------------------------------------------------
