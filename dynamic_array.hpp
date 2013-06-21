@@ -1,16 +1,13 @@
 // dynamic_array.hpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-06-20 17:03:07 (jonah)>
+// Time-stamp: <2013-06-20 20:54:42 (jonah)>
 
 // This file defines a library for using dynamic arrays of one and two
 // dimensions. Useful for Gaussian Elimination.
 
-// Include Guard
-// ----------------------------------------------------------------------
-#ifndef DYNAMIC_ARRAY_HEADER
-#define DYNAMIC_ARRAY_HEADER
-// ----------------------------------------------------------------------
+// Include guard
+#pragma once
 
 #include<cstdlib>
 #include<iostream> // streams needed for print functions
@@ -282,10 +279,4 @@ public:
     return out;
   }
 };
-
-
-// End include guard
-// ----------------------------------------------------------------------
-#endif
-// ----------------------------------------------------------------------
 
