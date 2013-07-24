@@ -1,7 +1,7 @@
 // dynamic_array_test_driver.cpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-06-20 17:05:31 (jonah)>
+// Time-stamp: <2013-07-21 13:04:45 (jonah)>
 
 // This file is a test driver for the dynamic_array.cpp
 
@@ -102,6 +102,18 @@ int main() {
   cout << "The old array is now: " << testing2 << endl;
   cout << "The new array is now: " << testing5 << endl;
 
+  cout << "\nTesting the equals operator." << endl;
+  Dynamic2DArray<double> testing10;
+  testing10 = Dynamic2DArray<double>(10,10);
+  for (int i = 0; i < 10; i++) {
+    for (int j = 0; j < 10; j++) {
+      testing10.access(i,j) = i*j;
+    }
+  }
+
+  cout << "testing 10 is:\n" 
+       << testing10
+       << endl;
 
   cout << "\n\nThe test is now complete!" << endl;
   return 0;

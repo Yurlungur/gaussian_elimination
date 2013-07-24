@@ -1,7 +1,7 @@
 // dynamic_array.hpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-06-20 20:54:42 (jonah)>
+// Time-stamp: <2013-07-21 13:50:42 (jonah)>
 
 // This file defines a library for using dynamic arrays of one and two
 // dimensions. Useful for Gaussian Elimination.
@@ -271,7 +271,7 @@ public:
       }
       s << get(row,array_width-1) << "]";
     }
-    s << "\n";
+    s << endl;
   }
   // Overload the stream input operator. 
   friend ostream& operator <<(ostream &out, const Dynamic2DArray<TYPE> &a) {
