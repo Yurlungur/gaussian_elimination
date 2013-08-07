@@ -1,7 +1,7 @@
 // gaussian_system.cpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-07-21 14:34:16 (jonah)>
+// Time-stamp: <2013-08-06 18:39:17 (jonah)>
 
 // This file implements a Gaussian system, which is a data structure
 // for holding a system of linear equations and modifying them in
@@ -11,6 +11,7 @@
 #include<iomanip>
 #include<fstream>
 #include<cassert>
+#include<cmath>
 #include"dynamic_array.hpp"
 #include"gaussian_system.hpp"
 using namespace std;
@@ -104,6 +105,31 @@ void GaussianSystem::initialize_permutation_vector() {
 
 // Interface
 // ----------------------------------------------------------------------
+
+// Returns true if the system isupper-triangular. False otherwise.
+bool GaussianSystem::is_upper_triangular() const {
+  double precision = DBL_EPSILON; // Precision to zero.
+  if ( size() <= 1 ) { // 1x1 matrix is upper-triangular
+    return true;
+  }
+  for (int column = 0; column < size(); column++) {
+    for (int row = column + 1; row < size(); row++) {
+      double entry = get(row,column);
+      if ( abs(entry) > precision ) {
+	return false;
+      }
+    }
+  }
+  return true;
+}
+
+// Tells the user the order of the permuted rows. Essential for
+// extracing the solution to the original system after Gaussian
+// elimination. Essentially a copy of permutation vector.
+Dynamic1DArray<int> GaussianSystem::get_permutations() const {
+  Dynamic1DArray<int> output(permutation_vector);
+  return output;
+}
 
 // Swaps row1 and row2 in the system. Useful for pivoting.
 void GaussianSystem::swap(int row1, int row2) {
@@ -218,7 +244,7 @@ void GaussianSystem::print(ostream& output_stream, int precision) const {
     output_stream << setprecision(precision)
 		  << matrix_get(row,size()-1) << " ";
     // The rows of the unknowns vector
-    output_stream << "] [ x_" << permutation_vector.get(row) << " ]";
+    output_stream << "] [ x_" << row << " ]";
     // The equals sign
     if (row == halfway) {
       output_stream << " = ";
@@ -229,7 +255,7 @@ void GaussianSystem::print(ostream& output_stream, int precision) const {
     // The rows of the knowns vector.
     output_stream << "[ " << vector_get(row) << " ]\n";
   }
-  output_stream<< endl;
+  output_stream << endl;
 }
 
 // ----------------------------------------------------------------------
@@ -239,10 +265,12 @@ void GaussianSystem::print(ostream& output_stream, int precision) const {
 // Overload the stream input operator.
 ostream& operator << (ostream &out, const GaussianSystem &sys) {
   sys.print(out);
+  return out;
 }
 
 // Overload the stream output operator.
 istream& operator >> (istream &in, GaussianSystem &sys) {
   sys.build(in);
+  return in;
 }
 // ----------------------------------------------------------------------

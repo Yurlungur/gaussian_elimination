@@ -1,7 +1,7 @@
 // gaussian_system_test_driver.cpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-07-21 14:32:12 (jonah)>
+// Time-stamp: <2013-07-27 15:18:17 (jonah)>
 
 // This file is the test driver for the Gaussian System class,
 // which is a data structure for holding a systme of linear
@@ -11,6 +11,7 @@
 #include <iostream>
 #include <fstream>
 #include <cassert>
+#include "dynamic_array.hpp"
 #include "gaussian_system.hpp"
 using namespace std;
 
@@ -54,6 +55,13 @@ int main() {
   testing1.print(cout,0);
   cout << endl;
 
+  cout << "Testing the permutation vector." << endl;
+  Dynamic1DArray<int> permutations;
+  permutations = testing1.get_permutations();
+  cout << "The permutation vector is:\n"
+       << permutations
+       << endl;
+
   cout << "\n\n"
        << "Testing the text file input method.\n"
        << "----------------------------------------------------\n" << endl;
@@ -65,7 +73,6 @@ int main() {
   cout << "The system is thus:\n";
   testing1.print(cout,0);
   cout << endl;
-  
 
   cout << "Test successful." << endl;
 }

@@ -1,7 +1,7 @@
 // gaussian_system.hpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-07-21 14:13:28 (jonah)>
+// Time-stamp: <2013-08-06 17:04:21 (jonah)>
 
 // This file prototypes a Gaussian system, which is a
 // data structure for holding a system of linear equations and
@@ -12,6 +12,7 @@
 // Include guard
 #pragma once
 
+#include <float.h>  // Lists machine epsilon
 #include <iostream> // for printing a system.
 #include <iomanip> // For controlling the output.
 #include <fstream> // For building a system from an input file
@@ -75,7 +76,14 @@ public: // Interface.
   int size() const {
     return system_size;
   }
-  int max_char_length() const;
+  // Returns true if the system isupper-triangular. False otherwise.
+  // To determine if a row element is zero, uses DEFAULT_PRECISION by
+  // default
+  bool is_upper_triangular() const;
+  // Tells the user the order of the permuted rows. Essential for
+  // extracing the solution to the original system after Gaussian
+  // elimination.
+  Dynamic1DArray<int> get_permutations() const;
   // Swaps row1 and row2 in the system. Useful for pivoting.
   void swap(int row1, int row2);
   // Sets the (i,j)th element of the system. The final
