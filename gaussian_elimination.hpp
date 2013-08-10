@@ -1,7 +1,7 @@
 // gaussian_elimination.hpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-08-06 18:14:33 (jonah)>
+// Time-stamp: <2013-08-06 18:55:44 (jonah)>
 
 // This file prototypes the Gaussian elimination library, which is a
 // set of functions to solve non-degenerate linear systems by Gaussian
@@ -59,3 +59,6 @@ void print_solution(ostream& output_stream,
 		    const Dynamic1DArray<double>& solutions_vector,
 		    int precision);
 
+// Solves the matrix equation by Gaussian elimination and back
+// substitution. Prints the solution and returns a solution vector.
+Dynamic1DArray<double> solve_system(GaussianSystem& g_sys);

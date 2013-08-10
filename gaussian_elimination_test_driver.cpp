@@ -1,7 +1,7 @@
 // gaussian_elimination_test_driver.cpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-08-06 18:29:14 (jonah)>
+// Time-stamp: <2013-08-09 21:28:41 (jonah)>
 
 // This file tests the gaussian elimination library. Just runs a
 // couple of simple tests.
@@ -49,6 +49,48 @@ int main() {
   solution1 = back_substitution(testing1);
   cout << "Got it! The solution is:" << endl;
   print_solution(cout,solution1,DBL_EPSILON);
+
+  cout << "\n\nNow testing a more sophisticated non-degenerate matrix.\n"
+       << endl;
+
+  int testing2_size = 3;
+  GaussianSystem testing2(testing2_size);
+  Dynamic1DArray<double> solution2;
+  testing2.matrix_set(0,0,2);
+  testing2.matrix_set(0,1,4);
+  testing2.matrix_set(0,2,-2);
+  testing2.matrix_set(1,0,4);
+  testing2.matrix_set(1,1,9);
+  testing2.matrix_set(1,2,-3);
+  testing2.matrix_set(2,0,-2);
+  testing2.matrix_set(2,1,-3);
+  testing2.matrix_set(2,2,7);
+  testing2.vector_set(0,2);
+  testing2.vector_set(1,8);
+  testing2.vector_set(2,10);
+
+//   int testing2_size = 5;
+//   GaussianSystem testing2(testing2_size);
+//   Dynamic1DArray<double> solution2;
+//   for (int i = 0; i < testing2_size * testing2_size; i++) {
+//     testing2.set(i / testing2_size, i % testing2_size, i+1);
+//   }
+//   for (int i = 0; i < testing2_size; i++) {
+//     testing2.vector_set(i,i+1);
+//   }
+  cout << "Our new matrix is:\n"
+       << testing2
+       << endl;
+
+  cout << "\nSolving...\n" << endl;
+
+  solution2 = solve_system(testing2);
+
+  cout << "\nGot it! The solution is:" << endl;
+  print_solution(cout,solution2,DBL_EPSILON);
+
+  cout << "And here's the original matrix...\n"
+       << testing2 << endl;
 
   cout << "\n\nThis conlcudes the test." << endl;
 }
