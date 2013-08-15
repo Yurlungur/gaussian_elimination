@@ -1,7 +1,7 @@
 // gaussian_elimination.cpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-08-09 21:36:35 (jonah)>
+// Time-stamp: <2013-08-15 17:48:45 (jonah)>
 
 // This file implements the Gaussian elimination library, which is a
 // set of functions to solve non-degenerate linear systems by Gaussian
@@ -66,8 +66,9 @@ void row_reduce(GaussianSystem& g_sys, int index) {
 
   // Local declarations
   double old;     // The old entry in the matrix system
-  double divisor; // To generate the new entry in the matrix system,
-		  // we willl need to divide by this number.
+  // To generate the new entry in the matrix system, we willl need to
+  // divide by this number.
+  double divisor = g_sys.get(index,index);
   double column_numerator; // To generate the new entry in the matrix
 			   // system, we will need to multiply by this
 			   // number.
@@ -75,19 +76,25 @@ void row_reduce(GaussianSystem& g_sys, int index) {
 			// system, we will need to multiply by this
 			// number.
   double new_entry; // The new value
+  int size = g_sys.size(); // The size of the system. 1 fewer f-call
 
-  for (int column = index; column <= g_sys.size(); column++) {
-    column_numerator = g_sys.get(index,column);
-    for (int row = index+1; row < g_sys.size(); row++) {
-       old = g_sys.get(row,column);
-       row_numerator = g_sys.get(row,index);
+
+  for (int row = index + 1; row < size; row++) {
+    row_numerator = g_sys.get(row,index);
+    for (int column = index; column <= size; column++) {
+      column_numerator = g_sys.get(index,column);
+      old = g_sys.get(row,column);
       // The new value
-       new_entry = old - ((row_numerator * column_numerator)/divisor);
+      new_entry = old - ((row_numerator * column_numerator)/divisor);
       // Set the new value
       g_sys.set(row,column,new_entry);
     }
+    // Now set every element in the column = index below row = index
+    // to zero.
+    g_sys.set(row,index,0);
   }
 }
+  
 //----------------------------------------------------------------------
 
 
@@ -111,6 +118,7 @@ bool gaussian_elimination(GaussianSystem& g_sys) {
     nondegenerate = nondegenerate && good_column;
     if ( good_column ) {
       row_reduce(g_sys,column);
+
     }
   }
   return nondegenerate;
@@ -139,9 +147,9 @@ Dynamic1DArray<double> back_substitution(const GaussianSystem& g_sys,
 
   // The permutation vector for the gaussian system. Used to ensure
   // that the x indexes for the solved unknowns are those originally
-  // inserted.
-  Dynamic1DArray<int> permutation;
-  permutation = g_sys.get_permutations();
+  // inserted. CURRENTLY UNUSED
+  //   Dynamic1DArray<int> permutation;
+  //   permutation = g_sys.get_permutations();
 
   // The list of values x values attained by back substitution
   Dynamic1DArray<double> output(size);
@@ -155,11 +163,12 @@ Dynamic1DArray<double> back_substitution(const GaussianSystem& g_sys,
 
     // After Gauss-Jordan elimination, the solution is just the knowns vector.
     output[i] = g_sys.vector_get(i);
+
     // But we didn't do Gauss-Jordan elimination. We did Gaussian
     // elimination. So to find the ith element of the solution, we
     // need to subtract the jth elements of the solution with
     // appropriate coefficients, where m > n.
-    for (int j = size-1; j > i; j--) {
+    for (int j = i+1; j < size; j++) {
       output[i] -= g_sys.get(i,j) * output[j];
     }
     // Finally, we need to divide by the coefficient in front of the
