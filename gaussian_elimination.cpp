@@ -1,7 +1,7 @@
 // gaussian_elimination.cpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-08-15 17:48:45 (jonah)>
+// Time-stamp: <2013-08-16 00:23:35 (jonah)>
 
 // This file implements the Gaussian elimination library, which is a
 // set of functions to solve non-degenerate linear systems by Gaussian
@@ -144,12 +144,6 @@ Dynamic1DArray<double> back_substitution(const GaussianSystem& g_sys,
 
   // Size of the Gaussian system
   int size = g_sys.size();
-
-  // The permutation vector for the gaussian system. Used to ensure
-  // that the x indexes for the solved unknowns are those originally
-  // inserted. CURRENTLY UNUSED
-  //   Dynamic1DArray<int> permutation;
-  //   permutation = g_sys.get_permutations();
 
   // The list of values x values attained by back substitution
   Dynamic1DArray<double> output(size);

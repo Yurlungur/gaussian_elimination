@@ -1,7 +1,7 @@
 // gaussian_system.cpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-08-06 18:39:17 (jonah)>
+// Time-stamp: <2013-08-16 00:24:25 (jonah)>
 
 // This file implements a Gaussian system, which is a data structure
 // for holding a system of linear equations and modifying them in
@@ -121,14 +121,6 @@ bool GaussianSystem::is_upper_triangular() const {
     }
   }
   return true;
-}
-
-// Tells the user the order of the permuted rows. Essential for
-// extracing the solution to the original system after Gaussian
-// elimination. Essentially a copy of permutation vector.
-Dynamic1DArray<int> GaussianSystem::get_permutations() const {
-  Dynamic1DArray<int> output(permutation_vector);
-  return output;
 }
 
 // Swaps row1 and row2 in the system. Useful for pivoting.

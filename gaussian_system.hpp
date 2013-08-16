@@ -1,7 +1,7 @@
 // gaussian_system.hpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-08-06 17:04:21 (jonah)>
+// Time-stamp: <2013-08-16 00:24:50 (jonah)>
 
 // This file prototypes a Gaussian system, which is a
 // data structure for holding a system of linear equations and
@@ -80,10 +80,6 @@ public: // Interface.
   // To determine if a row element is zero, uses DEFAULT_PRECISION by
   // default
   bool is_upper_triangular() const;
-  // Tells the user the order of the permuted rows. Essential for
-  // extracing the solution to the original system after Gaussian
-  // elimination.
-  Dynamic1DArray<int> get_permutations() const;
   // Swaps row1 and row2 in the system. Useful for pivoting.
   void swap(int row1, int row2);
   // Sets the (i,j)th element of the system. The final
