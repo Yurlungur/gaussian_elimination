@@ -1,7 +1,7 @@
 // gaussian_elimination_test_driver.cpp
 
 // Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-// Time-stamp: <2013-08-09 21:28:41 (jonah)>
+// Time-stamp: <2013-08-15 19:50:45 (jonah)>
 
 // This file tests the gaussian elimination library. Just runs a
 // couple of simple tests.
@@ -69,15 +69,7 @@ int main() {
   testing2.vector_set(1,8);
   testing2.vector_set(2,10);
 
-//   int testing2_size = 5;
-//   GaussianSystem testing2(testing2_size);
-//   Dynamic1DArray<double> solution2;
-//   for (int i = 0; i < testing2_size * testing2_size; i++) {
-//     testing2.set(i / testing2_size, i % testing2_size, i+1);
-//   }
-//   for (int i = 0; i < testing2_size; i++) {
-//     testing2.vector_set(i,i+1);
-//   }
+
   cout << "Our new matrix is:\n"
        << testing2
        << endl;
@@ -91,7 +83,7 @@ int main() {
 
   cout << "And here's the original matrix...\n"
        << testing2 << endl;
-
+  
   cout << "\n\nThis conlcudes the test." << endl;
 }
 // ----------------------------------------------------------------------
