@@ -1,7 +1,7 @@
 Gaussian Elimination
 ----------------------------------------------------------------------
 Author: Jonah Miller (jonah.maxwell.miller@gmail.com)
-Time-stamp: <2013-08-15 22:32:34 (jonah)>
+Time-stamp: <2013-08-15 22:39:48 (jonah)>
 
 This is my implementation of the Gaussian Elimination algorithm.
 There are a number of pieces:
@@ -16,5 +16,9 @@ There are a number of pieces:
 To just build the libraries so you can use them in your code,
 use:
     make all
+
+Currently the only compiler supported is the GNU compiler, G++. However, if you
+open up the Makefile with a text editor and change the parameters to your system,
+it'll probably work.
 
 This also generates test drivers. Thanks for reading!
